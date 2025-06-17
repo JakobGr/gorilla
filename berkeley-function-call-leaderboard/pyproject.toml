@@ -39,6 +39,7 @@ dependencies = [
     "writer-sdk>=2.1.0",
     "overrides",
     "boto3",
+    "azure-identity",
 ]
 
 [project.scripts]
