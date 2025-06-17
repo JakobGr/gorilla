@@ -21,6 +21,7 @@ from openai import AzureOpenAI, RateLimitError
 class AzureOpenAIHandler(BaseHandler):
     def __init__(self, model_name, temperature) -> None:
         super().__init__(model_name, temperature)
+        self.model_style = ModelStyle.OpenAI
         self.api_key = os.getenv("AZURE_OPENAI_API_KEY")
         self.endpoint = os.getenv("AZURE_OPENAI_API_ENDPOINT")
         self.api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
