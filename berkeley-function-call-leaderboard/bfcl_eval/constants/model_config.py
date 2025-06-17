@@ -48,6 +48,7 @@ from bfcl_eval.model_handler.local_inference.salesforce_llama import SalesforceL
 from bfcl_eval.model_handler.local_inference.salesforce_qwen import SalesforceQwenHandler
 from bfcl_eval.model_handler.local_inference.think_agent import ThinkAgentHandler
 from bfcl_eval.model_handler.api_inference.ling import LingAPIHandler
+from bfcl_eval.model_handler.api_inference.azure_openai import AzureOpenAIHandler
 
 # -----------------------------------------------------------------------------
 # A mapping of model identifiers to their respective model configurations.
@@ -97,6 +98,19 @@ class ModelConfig:
 
 # Inference through API calls
 api_inference_model_map = {
+    "azure-gpt-4o-mini-2024-07-18-global": ModelConfig(
+        model_name="azure-gpt-4o-mini-2024-07-18-global",
+        display_name="GPT-4o-mini-2024-07-18-global (FC)",
+        url="https://azure.microsoft.com/en-us/products/ai-services/openai-service",
+        org="Azure OpenAI",
+        license="Proprietary",
+        model_handler=AzureOpenAIHandler,
+        input_price=0.15,  # pricing from https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/?cdn=disable
+        output_price=0.6,
+        is_fc_model=True,
+        underscore_to_dot=False,
+    ),
+
     "gorilla-openfunctions-v2": ModelConfig(
         model_name="gorilla-openfunctions-v2",
         display_name="Gorilla-OpenFunctions-v2 (FC)",
