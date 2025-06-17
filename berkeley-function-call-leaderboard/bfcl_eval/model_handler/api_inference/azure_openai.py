@@ -16,21 +16,28 @@ from bfcl_eval.model_handler.utils import (
     system_prompt_pre_processing_chat_model,
 )
 from openai import AzureOpenAI, RateLimitError
-
+from azure.identity import DefaultAzureCredential, get_bearer_token_provider
 
 class AzureOpenAIHandler(BaseHandler):
     def __init__(self, model_name, temperature) -> None:
         super().__init__(model_name, temperature)
         self.model_style = ModelStyle.OpenAI
-        self.api_key = os.getenv("AZURE_OPENAI_API_KEY")
         self.endpoint = os.getenv("AZURE_OPENAI_API_ENDPOINT")
-        self.api_version = os.getenv("AZURE_OPENAI_API_VERSION", "2025-01-01-preview")
-        self.deployment_name = os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
-        self.client = AzureOpenAI(
-            api_key=self.api_key,
-            azure_endpoint=self.endpoint,
-            api_version=self.api_version,
+        self.api_version="2025-01-01-preview"
+        self.deployment_name =  os.getenv("AZURE_OPENAI_DEPLOYMENT_NAME")
+
+        # Initialize Azure OpenAI client with Entra ID authentication
+        self.token_provider = get_bearer_token_provider(
+            DefaultAzureCredential(),
+            "https://cognitiveservices.azure.com/.default"
         )
+
+        self.client = AzureOpenAI(
+            azure_endpoint=self.endpoint,
+            azure_ad_token_provider=self.token_provider,
+            api_version="2025-01-01-preview",
+        )
+
     # def __init__(self, model_name, temperature) -> None:
     #     super().__init__(model_name, temperature)
     #     self.model_style = ModelStyle.OpenAI
