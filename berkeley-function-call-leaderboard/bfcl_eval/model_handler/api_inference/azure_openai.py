@@ -17,6 +17,7 @@ from bfcl_eval.model_handler.utils import (
 )
 from openai import AzureOpenAI, RateLimitError
 from azure.identity import DefaultAzureCredential, get_bearer_token_provider
+from bfcl_eval.constants.default_prompts import DEFAULT_SYSTEM_PROMPT_WITHOUT_FUNC_DOC
 
 class AzureOpenAIHandler(BaseHandler):
     def __init__(self, model_name, temperature) -> None:
@@ -105,7 +106,10 @@ class AzureOpenAIHandler(BaseHandler):
                 )
 
     def _pre_query_processing_FC(self, inference_data: dict, test_entry: dict) -> dict:
-        inference_data["message"] = []
+        # inference_data["message"] = []
+        inference_data["message"] = [
+            {"role": "system", "content": DEFAULT_SYSTEM_PROMPT_WITHOUT_FUNC_DOC}
+        ]
         return inference_data
 
     def _compile_tools(self, inference_data: dict, test_entry: dict) -> dict:
