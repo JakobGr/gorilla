@@ -98,7 +98,7 @@ class ModelConfig:
 
 # Inference through API calls
 api_inference_model_map = {
-    "azure-gpt-4o-mini-2024-07-18-global": ModelConfig(
+    "azure-gpt-4o-mini-2024-07-18-global-FC": ModelConfig(
         model_name="azure-gpt-4o-mini-2024-07-18-global-FC",
         display_name="GPT-4o-mini-2024-07-18-global (FC)",
         url="https://azure.microsoft.com/en-us/products/ai-services/openai-service",
@@ -108,7 +108,7 @@ api_inference_model_map = {
         input_price=0.15,  # pricing from https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/?cdn=disable
         output_price=0.6,
         is_fc_model=True,
-        underscore_to_dot=False,
+        underscore_to_dot=True,
     ),
 
     "gorilla-openfunctions-v2": ModelConfig(
