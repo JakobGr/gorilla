@@ -98,8 +98,8 @@ class ModelConfig:
 
 # Inference through API calls
 api_inference_model_map = {
-    "azure-gpt-4o-mini-2024-07-18-global-FC": ModelConfig(
-        model_name="azure-gpt-4o-mini-2024-07-18-global-FC",
+    "azure-gpt-4o-mini-2024-07-18-global": ModelConfig(
+        model_name="azure-gpt-4o-mini-2024-07-18-global",
         display_name="GPT-4o-mini-2024-07-18-global (FC)",
         url="https://azure.microsoft.com/en-us/products/ai-services/openai-service",
         org="Azure OpenAI",
